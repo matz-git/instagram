@@ -20,7 +20,9 @@ export default function Timeline() {
                         </h1>
                     </div>
                     <div className="text-gray-700 text-center flex items-center">
+                        {/* {console.log('dfsdfs')}
                         {console.log(user)}
+                        {console.log('dfsdfs')} */}
                         {user ? (
                             <>
                                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
