@@ -96,7 +96,7 @@
         ]
       }
     ],
-    "no-nested-ternary": "off",
+    "no-nested-ternary": "off"
   },
   "plugins": [
     "prettier",
