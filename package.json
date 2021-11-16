@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "-": "0.0.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@welldone-software/why-did-you-render": "^6.2.0",
     "date-fns": "^2.22.1",
     "firebase": "^8.6.5",
+    "loadtest": "^5.1.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,7 +24,7 @@
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/app.css --watch",
     "react-scripts:start": "sleep 5 && react-scripts start",
     "start": "run-p watch:css react-scripts:start",
-    "build": "run-s build:css react-scripts:build",
+    "build": "run-s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

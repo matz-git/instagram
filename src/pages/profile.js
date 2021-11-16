@@ -26,7 +26,6 @@ export default function Profile() {
     return user?.username ? (
         <div className="bg-gray-background">
             <Header />
-            <div className="mx-auto max-w-screen-lg">{username}</div>
             <UserProfile user={user} />
         </div>
     ) : null;

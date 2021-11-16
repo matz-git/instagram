@@ -95,7 +95,8 @@
           "invalidHref"
         ]
       }
-    ]
+    ],
+    "no-nested-ternary": "off",
   },
   "plugins": [
     "prettier",
