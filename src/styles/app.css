@@ -890,6 +890,10 @@ video {
   text-transform: uppercase;
 }
 
+.line-through {
+  text-decoration: line-through;
+}
+
 .select-none {
   -webkit-user-select: none;
           user-select: none;

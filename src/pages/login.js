@@ -39,7 +39,7 @@ export default function Login() {
                 <h1 className="flex justify-center w-full text-red-primary font-bold text-2xl mb-12">for learning purposes</h1>
                 <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded">
                 <h1 className="flex justify-center w-full">
-                    <img src="/images/logo.png" alt="Instaclone" className="mt-2 w-6/12 mb-4" />
+                    {/* <img src="/images/logo.png" alt="Instaclone" className="mt-2 w-6/12 mb-4" /> */}
                 </h1>
 
                 {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
@@ -75,7 +75,7 @@ export default function Login() {
             <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
                 <p className="text-sm">Don´t have an account?{` `}
                     <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium">
-                        Sign up
+                        <span className="line-through">Sign up</span>
                     </Link>
                 </p>
             </div>

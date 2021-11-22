@@ -29,7 +29,8 @@ export default function App() {
                             <Login />
                         </IsUserLoggedIn>
                         <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
-                            <SignUp />
+                            {/* <SignUp /> */}
+                            <Login />
                         </IsUserLoggedIn>
                  
                          
