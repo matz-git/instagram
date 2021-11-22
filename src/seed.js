@@ -3,10 +3,10 @@
 export function seedDatabase(firebase) {
     const users = [
       {
-        userId: '5H8VAh8zXqYJzAnH5x8JCdq6jBX2',
-        username: 'stefan',
-        fullName: 'stefan',
-        emailAddress: 'karlhadwen@gmail.com',
+        userId: 'OxFCQDdMOraLu2v7h9ZqNOF9nLF3',
+        username: 'st',
+        fullName: 'st',
+        emailAddress: 'st@st.st',
         following: ['2'],
         followers: ['2', '3', '4'],
         dateCreated: Date.now()
@@ -54,7 +54,7 @@ export function seedDatabase(firebase) {
           photoId: i,
           userId: '2',
           imageSrc: `/images/users/raphael/${i}.jpg`,
-          caption: 'Saint George and the Dragon',
+          caption: 'Saint George and the Dragon111',
           likes: [],
           comments: [
             {

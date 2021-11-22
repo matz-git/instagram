@@ -7,6 +7,9 @@ import useAuthListener from './hooks/use-auth-listener';
 import ProtectedRoute from './helpers/protected-route';
 import IsUserLoggedIn from './helpers/is-user-logged-in';
 
+// require('dotenv').config();
+
+
 const Login = lazy(() => import('./pages/login'));
 const SignUp = lazy(() => import('./pages/sign-up'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
@@ -26,9 +29,13 @@ export default function App() {
                             <Login />
                         </IsUserLoggedIn>
                         <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
-                            <Login />
+                            <SignUp />
                         </IsUserLoggedIn>
-                        <Route path={ROUTES.PROFILE} component={Profile} />
+                 
+                         
+                        <ProtectedRoute user={user} path={ROUTES.PROFILE} exact>
+                            <Profile />
+                        </ProtectedRoute> 
                         <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
                             <Dashboard />
                         </ProtectedRoute>

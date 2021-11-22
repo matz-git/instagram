@@ -5,9 +5,9 @@ import Timeline from '../components/timeline';
 
 export default function Dashboard() {
     useEffect(() => {
-        document.title = 'Instagram';
+        document.title = 'Instaclone';
     }, []);
-
+    
     return (
         <div className="bg-gray-background">
             <Header />
