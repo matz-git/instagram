@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-// NOTE: replace 'NvPY9M9MzFTARQ6M816YAzDJxZ72' with your Firebase auth user id (can be taken from Firebase)
+/* eslint-disable import/prefer-default-export */
 export function seedDatabase(firebase) {
     const users = [
       {
@@ -37,9 +37,27 @@ export function seedDatabase(firebase) {
         following: [],
         followers: ['NvPY9M9MzFTARQ6M816YAzDJxZ72'],
         dateCreated: Date.now()
+      },
+      {
+        userId: 'srDY8iUofyPGGApzHzfDqB7kKVg2',
+        username: 'max',
+        fullName: 'Max Musterman',
+        emailAddress: 'max@mustermann.com',
+        following: [],
+        followers: [],
+        dateCreated: Date.now()
+      },
+      {
+        userId: '6',
+        username: 'stefan',
+        fullName: 'Stefan',
+        emailAddress: 'stefan@stefan.com',
+        following: [],
+        followers: [],
+        dateCreated: Date.now()
       }
     ];
-  
+   
     // eslint-disable-next-line prefer-const
     for (let k = 0; k < users.length; k++) {
       firebase.firestore().collection('users').add(users[k]);
@@ -54,7 +72,7 @@ export function seedDatabase(firebase) {
           photoId: i,
           userId: '2',
           imageSrc: `/images/users/raphael/${i}.jpg`,
-          caption: 'Saint George and the Dragon111',
+          caption: 'Saint George and the Dragon',
           likes: [],
           comments: [
             {
@@ -71,5 +89,45 @@ export function seedDatabase(firebase) {
           dateCreated: Date.now()
         });
     }
-  }
-  
+
+    // eslint-disable-next-line prefer-const
+    for (let i = 11; i <= 13; ++i) {
+        firebase
+          .firestore()
+          .collection('photos')
+          .add({
+            photoId: i,
+            userId: 'srDY8iUofyPGGApzHzfDqB7kKVg2',
+            imageSrc: `/images/users/max/${i}.jpg`,
+            caption: 'Image caption',
+            likes: [],
+            comments: [
+              {
+                displayName: 'dali',
+                comment: 'Love this!'
+              }
+            ],
+            userLatitude: '40.7128°',
+            userLongitude: '74.0060°',
+            dateCreated: Date.now()
+        });
+    }
+    
+    // eslint-disable-next-line prefer-const
+    for (let i = 21; i <= 23; ++i) {
+        firebase
+          .firestore()
+          .collection('photos')
+          .add({
+            photoId: i,
+            userId: '6',
+            imageSrc: `/images/users/stefan/${i}.jpg`,
+            caption: 'pictures taken with huawei p30 pro',
+            likes: [],
+            comments: [],
+            userLatitude: '40.7128°',
+            userLongitude: '74.0060°',
+            dateCreated: Date.now()
+        });
+    }
+}

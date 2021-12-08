@@ -10,7 +10,7 @@ export default function Post({ content }) {
 
     const commentInput = useRef(null);
     const handleFocus = () => commentInput.current.focus();
-    // console.log(content)
+
 
     return (
         <div className="rounded col-end-4 border bg-white border-gray-primary mb-12">

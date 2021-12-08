@@ -26,13 +26,10 @@ export default function SignUp() {
                     .auth()
                     .createUserWithEmailAndPassword(emailAddress, password);
 
-                // authentication
-                // -> emailAddress & password & username (displayName)
                 await createdUserResult.user.updateProfile({
                     displayName: username
                 });
 
-                // firebase user collection (create a document)
                 await firebase.firestore().collection('users').add({
                     userId: createdUserResult.user.uid,
                     username: username.toLowerCase(),
@@ -44,10 +41,6 @@ export default function SignUp() {
                 });
 
                 history.push(ROUTES.DASHBOARD);
-
-
-
-
             } catch (error) {
                 setFullName('');
                 setEmailAddress('');
@@ -58,11 +51,6 @@ export default function SignUp() {
             setUsername('');
             setError('That username is already taken, please try another.');
         }
-        // try {
-           
-        // } catch (error) {
-            
-        // }
     };
 
     useEffect(() => {
@@ -95,7 +83,7 @@ export default function SignUp() {
                     <input
                         aria-label="Enter your full name"
                         type="text"
-                        placeholder="Full Name"
+                        placeholder="Full name"
                         className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                         onChange={({ target }) => setFullName(target.value)}
                         value={fullName}
@@ -108,7 +96,6 @@ export default function SignUp() {
                         onChange={({ target }) => setEmailAddress(target.value)}
                         value={emailAddress}
                     />
-                    {/* bei falscher email adresse wird password feld nicht geleert??!? */}
                     <input
                         aria-label="Enter your password"
                         type="password"

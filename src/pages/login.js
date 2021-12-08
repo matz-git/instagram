@@ -53,7 +53,6 @@ export default function Login() {
                         onChange={({ target }) => setEmailAddress(target.value)}
                         value={emailAddress}
                     />
-                    {/* bei falscher email adresse wird password feld nicht geleert??!?  -> value=... hinzufügen und später leeren ausprobieren */}
                     <input
                         aria-label="Enter your password"
                         type="password"
@@ -67,14 +66,15 @@ export default function Login() {
                         type="submit"
                         className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${isInvalid && 'opacity-50'}`}
                     >
-                        Log In
+                        Login
                     </button>
                 </form>
             
             </div>
             <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
                 <p className="text-sm">Don´t have an account?{` `}
-                    <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium">
+                    {/* <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium"> */}
+                    <Link to={ROUTES.LOGIN} className="font-bold text-blue-medium">
                         <span className="line-through">Sign up</span>
                     </Link>
                 </p>

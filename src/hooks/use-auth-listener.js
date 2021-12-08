@@ -7,14 +7,11 @@ export default function useAuthListener() {
 
 
     useEffect(() => {
-        // document.title = 'Instaclone';
         const listener = firebase.auth().onAuthStateChanged((authUser) => {
             if (authUser) {
-                // we have a user... therefore we can store the user in localstorage
                 localStorage.setItem('authUser', JSON.stringify(authUser));
                 setUser(authUser);
             } else {
-                // we dont have an authUser, therefore clear the localstorage
                 localStorage.removeItem('authUser');
                 setUser(null);
             }

@@ -19,14 +19,8 @@ export default function Suggestion({ userId, following, loggedInUserDocId }) {
             suggestedProfiles();
         }
 
-        // console.log('profiles',profiles)
-    }, [userId]); // useEfeect wird immer dann aufgerufen, wenn userId geändert wird
-    // hint: use the firebase service
-    // call the async function ^^^^^within useEffect  
-    // store it in state
-    // go ahead and render (wait on the profiles as in 'skeleton')
-
-
+    }, [userId]); 
+    
     /* eslint-disable */
     return !profiles ? (
         <Skeleton count={1} height={150} className="mt-5" />

@@ -7,9 +7,7 @@ export async function doesUsernameExist(username) {
         .where('username', '==', username)
         .get();
 
-        // console.log(result);
-
-        return result.docs.map((user) => user.data().length > 0);
+    return result.docs.map((user) => user.data().length > 0);
 }
 
 export async function getUserByUsername(username) {
@@ -19,14 +17,10 @@ export async function getUserByUsername(username) {
         .where('username', '==', username)
         .get();
 
-        // console.log(result);
-
     return result.docs.map((item) => ({
         ... item.data(),
         docId: item.id
     }));
-
-    // return user.length > 0 ? user : false;
 }
 
 // get user from the firestore where userId === userId (passed from the auth)
@@ -37,7 +31,6 @@ export async function getUserByUserId(userId) {
         .where('userId', '==', userId)
         .get();
 
-        // ... nachschauen + docId???
         const user = result.docs.map((item) => ({
             ... item.data(),
             docId: item.id
@@ -56,14 +49,8 @@ export async function getSuggestedProfiles(userId, following) {
     return result.docs
         .map((user) => ({ ... user.data(), docId: user.id }))
         .filter((profile) => profile.userId !== userId && !following.includes(profile.userId));
-        // ... nachschauen + docId???
-        // const user = result.docs.map((item) => ({
-        //     ... item.data(),
-        //     docId: item.id
-        // }));
 }
 
-// updateLoggedInUserFollowing, updateFollowedUserFollowers
 export async function updateLoggedInUserFollowing(
     loggedInUserDocId, // currently logged in user document id (stefan´s profile)
     profileId, // the user that karl requests to follow
@@ -80,7 +67,6 @@ export async function updateLoggedInUserFollowing(
         });
 }
 
-// updateLoggedInUserFollowing, updateFollowedUserFollowers
 export async function updateFollowedUserFollowers(
     profileDocId, // the user that karl requests to follow
     loggedInUserDocId, // currently logged in user document id (stefan´s profile)
@@ -104,14 +90,10 @@ export async function getPhotos(userId, following) {
         .where('userId', 'in', following)
         .get();
 
-    // console.log(result)
-
     const userFollowedPhotos = result.docs.map((photo) => ({
         ... photo.data(),
         docId: photo.id
     }));
-
-    // console.log('userFoff', userFollowedPhotos);
 
     const photosWithUserDetails = await Promise.all(
         userFollowedPhotos.map(async (photo) => {
@@ -128,21 +110,6 @@ export async function getPhotos(userId, following) {
 
     return photosWithUserDetails;
 }
-// export async function getUserIdByUsername(username) {
-//     const result = await firebase
-//         .firestore()
-//         .collection('users')
-//         .where('username', '==', username)
-//         .get();
-
-//     // ... nachschauen + docId???
-//     const user = result.docs.map((item) => ({
-//         ... item.data(),
-//         docId: item.id
-//     }));
-
-// return user.id; 
-// }
 
 export async function getUserPhotosByUsername(username) {
     const [user] = await getUserByUsername(username);
@@ -156,8 +123,6 @@ export async function getUserPhotosByUsername(username) {
         ... item.data(),
         docId: item.id
     }));
-    // console.log('userId', userId);
-    // return 0;
 }
 
 export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
@@ -174,7 +139,6 @@ export async function isUserFollowingProfile(loggedInUserUsername, profileUserId
     }));
 
     return response.userId;
-    // console.log('response', response)
 }
 
 export async function toggleFollow(
@@ -184,10 +148,10 @@ export async function toggleFollow(
     profileUserId,
     followingUserId
 ) {
-    console.log('activeUserDocId', activeUserDocId)
-    console.log('profileDocId', profileDocId)
-    console.log('profileUserId', profileUserId)
-    console.log('followingUserId', followingUserId)
+    // console.log('activeUserDocId', activeUserDocId)
+    // console.log('profileDocId', profileDocId)
+    // console.log('profileUserId', profileUserId)
+    // console.log('followingUserId', followingUserId)
     // 1st param: karls doc id
     // 2nd param: raphaels user id
     // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
@@ -198,13 +162,3 @@ export async function toggleFollow(
     // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
     await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
- 
-
-
-
-
-
-
-
-
-
