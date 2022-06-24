@@ -19,7 +19,7 @@ export default function Suggestion({ userId, following, loggedInUserDocId }) {
             suggestedProfiles();
         }
 
-    }, [userId]); 
+    }, [userId, following]); 
     
     /* eslint-disable */
     return !profiles ? (

@@ -63,7 +63,7 @@ export default function SignUp() {
                 <img src="/images/iphone-with-profile.jpg" alt="iPhone with Instaclone App" />
             </div>
             <div className="flex-col w-2/5">
-                <h1 className="flex justify-center w-full text-red-primary font-bold text-2xl mb-12">for learning purposes</h1>
+                {/* <h1 className="flex justify-center w-full text-red-primary font-bold text-2xl mb-12">for learning purposes</h1> */}
                 <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded">
                 <h1 className="flex justify-center w-full">
                     <img src="/images/logo.png" alt="Instaclone" className="mt-2 w-6/12 mb-4" />

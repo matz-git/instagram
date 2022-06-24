@@ -48,6 +48,7 @@
       "last 1 safari version"
     ]
   },
+  "homepage": "https://instaclone.stefan-steil.de/",
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "babel-eslint": "^10.1.0",

@@ -21,9 +21,7 @@ export default function App() {
                 <Suspense fallback={<p>Loading ... </p>}>
                     <Switch>
                         <Route path={ROUTES.LOGIN} component={Login} />
-                        {/* <Route path={ROUTES.SIGN_UP} component={SignUp} /> */}
-                        <Route path={ROUTES.SIGN_UP} component={Login} />
-                        {/* <Route path={ROUTES.PROFILE} component={Profile} /> */}
+                        <Route path={ROUTES.SIGN_UP} component={SignUp} />
                         <ProtectedRoute user={user} path={ROUTES.PROFILE} exact>
                             <Profile />
                         </ProtectedRoute>

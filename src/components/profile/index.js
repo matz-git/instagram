@@ -2,7 +2,7 @@ import { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from './header';
 import Photos from './photos';
-import { getUserByUsername, getUserPhotosByUsername } from '../../services/firebase';
+import { getUserPhotosByUsername } from '../../services/firebase';
 
 const reducer = (state, newState) => ({ ... state, ...newState});
 const initialState = {
@@ -23,10 +23,9 @@ export default function Profile({ user }) {
             dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length });
         }
         if (user.username) {
-
             getProfileInfoAndPhotos();
         }
-    }, [user.username]);
+    }, [user]);
 
     return (
         <>

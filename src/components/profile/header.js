@@ -48,18 +48,16 @@ export default function Header({
         <div className="container flex justify-center items-center">
             {profileUsername ? (
                 <img
+                    onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src='/images/avatars/stefan.jpg';
+                    }}
                     className="rounded-full h-40 w-40 flex`"
                     alt={`${profileUsername} profile pic`}
                     src={`/images/avatars/${profileUsername}.jpg`}
                 />
             ) : (
                 <p />
-                // /* default profile image: */
-                // <img
-                //     className="rounded-full h-40 w-40 flex`"
-                //     alt="Karls profile pic"
-                //     src="/images/avatars/karl.jpg"
-                // /> 
             )}
         </div>
         <div className="flex items-center justify-center flex-col col-span-2">

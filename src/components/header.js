@@ -74,6 +74,10 @@ export default function Timeline() {
                                 <div className="flex items-center cursor-pointer">
                                     <Link to={`/p/${user?.username}`}>
                                         <img
+                                            onError={({ currentTarget }) => {
+                                                currentTarget.onerror = null; // prevents looping
+                                                currentTarget.src='/images/avatars/stefan.jpg';
+                                            }}
                                             className="rounded-full h-8 w-8 flex"
                                             src={`/images/avatars/${user.username}.jpg`}
                                             alt={`${user.username} profile`}
