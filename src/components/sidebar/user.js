@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import  { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 
-const User = ({ username, fullName }) => 
+const User = ({ username, fullName, profileImage }) => 
     !username || !fullName ? (
         <Skeleton count={1} height={61} />       
     ) : (
@@ -14,7 +14,7 @@ const User = ({ username, fullName }) =>
                         currentTarget.src='/images/avatars/stefan.jpg';
                     }}
                     className="rounded-full w-16 flex mr-3"
-                    src={`/images/avatars/${username}.jpg`}
+                    src={profileImage}
                     alt=""
                     />
             </div>
@@ -29,7 +29,8 @@ export default User;
 
 User.propTypes = {
     username: PropTypes.string,
-    fullName: PropTypes.string
+    fullName: PropTypes.string,
+    profileImage: PropTypes.string
 };
 
 

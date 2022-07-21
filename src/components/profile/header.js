@@ -2,26 +2,33 @@ import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
-import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
+import { isUserFollowingProfile, toggleFollow, updateLoggedInUserProfileImage } from '../../services/firebase';
 import UserContext from '../../context/user';
+import { storage } from '../../lib/firebase';
+
 
 export default function Header({ 
     photosCount, 
     setFollowerCount,
     followerCount, 
+    handleUpd,
     profile: {
         docId: profileDocId,
         userId: profileUserId,
         fullName,
         followers, // in production DONT parse all followers (e.g. followers > 1m)
         following, // in production DONT parse all followings (e.g. followings > 1m)
-        username: profileUsername
+        username: profileUsername,
+        profileImage: profilImageNew
     }
 }) {
     const { user: loggedInUser } = useContext(UserContext);
     const { user } = useUser(loggedInUser?.uid);
     const [isFollowingProfile, setIsFollowingProfile] = useState(false);
     const activeBtnFollow = user && user.username && user.username !== profileUsername;
+    const [activeBtnUpload, setActiveBtnUpload] = useState();
+    const [profileImage, setProfileImage] = useState('');
+    const [file, setFile] = useState(null);
 
     const handleToggleFollow = async () => {
         setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
@@ -31,6 +38,9 @@ export default function Header({
         await toggleFollow(isFollowingProfile, user.docId, profileDocId, profileUserId, user.userId);
     };
     
+    if (typeof profileImage === 'undefined')
+        setProfileImage('/images/avatars/stefan.jpg')
+
     useEffect(() => {
         const isLoggedInUserFollowingProfile = async () => {
             const isFollowing = await isUserFollowingProfile(user.username, profileUserId)
@@ -40,9 +50,32 @@ export default function Header({
         if (user?.username && profileUserId) {
             isLoggedInUserFollowingProfile();
         }
+      
+        setProfileImage(profilImageNew)
 
-    }, [user?.username, profileUserId]);
+    }, [user?.username, profileUserId, profilImageNew]);
 
+
+    async function handleUpload(e) {
+        e.preventDefault();
+        const path = `/images/${file.name}`;
+        const ref = storage.ref(path);
+    
+        await ref.put(file);
+        const url = await ref.getDownloadURL();
+        updateLoggedInUserProfileImage(profileDocId, url)
+        setProfileImage(url)
+        setFile(null);
+        handleUpd(url);
+        setActiveBtnUpload(false) 
+    }
+
+    function handleChange(e) {
+        if (e.target.files[0]) {
+            setFile(e.target.files[0]);
+            setActiveBtnUpload(true)
+        }
+    }
 
     return <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
         <div className="container flex justify-center items-center">
@@ -54,7 +87,7 @@ export default function Header({
                     }}
                     className="rounded-full h-40 w-40 flex`"
                     alt={`${profileUsername} profile pic`}
-                    src={`/images/avatars/${profileUsername}.jpg`}
+                    src={profileImage}
                 />
             ) : (
                 <p />
@@ -63,6 +96,12 @@ export default function Header({
         <div className="flex items-center justify-center flex-col col-span-2">
             <div className="container flex items-center">
                 <p className="text-2xl mr-4">{profileUsername}</p>
+                {!activeBtnFollow && ( 
+                <form onSubmit={handleUpload}>
+                    <input type="file" onChange={handleChange} />
+                    { activeBtnUpload && (<button  className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"type="submit" disabled={!file}>upload</button>)}
+                </form>
+                )}
                 {activeBtnFollow && (
                     <button
                         className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
@@ -110,6 +149,7 @@ export default function Header({
 
 Header.propTypes = {
     photosCount: PropTypes.number.isRequired, 
+    handleUpd: PropTypes.func, 
     followerCount: PropTypes.number.isRequired,
     setFollowerCount: PropTypes.func.isRequired,
     profile: PropTypes.shape({
@@ -118,6 +158,7 @@ Header.propTypes = {
         fullName: PropTypes.string,
         username: PropTypes.string,
         following: PropTypes.array,
-        followers: PropTypes.array 
+        followers: PropTypes.array,
+        profileImage: PropTypes.string
     }).isRequired,
 };

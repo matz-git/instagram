@@ -8,14 +8,18 @@ const reducer = (state, newState) => ({ ... state, ...newState});
 const initialState = {
     profile: {},
     photosCollection: [],
-    followerCount: 0
+    followerCount: 0,
 };
 
-export default function Profile({ user }) {
-    const [{ profile, photosCollection, followerCount}, dispatch] = useReducer(
+export default function Profile({ user, setImageContainer }) {
+    const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
         reducer,
         initialState
     );
+
+    const handleUpd = (a) => {
+        setImageContainer(a)
+    }
 
     useEffect(() => {
         async function getProfileInfoAndPhotos() {
@@ -27,6 +31,7 @@ export default function Profile({ user }) {
         }
     }, [user]);
 
+
     return (
         <>
             <Header 
@@ -34,9 +39,9 @@ export default function Profile({ user }) {
                 profile={profile}
                 followerCount={followerCount}
                 setFollowerCount={dispatch}
+                handleUpd={handleUpd}
             />
             <Photos photos={photosCollection} />
-          
         </>
     );
 }
@@ -50,5 +55,7 @@ Profile.propTypes = {
         fullName: PropTypes.string.isRequired,
         userId: PropTypes.string.isRequired,
         username: PropTypes.string.isRequired,
-    }).isRequired
+        profileImage: PropTypes.string
+    }).isRequired,
+    setImageContainer: PropTypes.func
 }

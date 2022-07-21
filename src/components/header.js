@@ -1,15 +1,22 @@
 import { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
 import * as ROUTES from '../constants/routes';
 import useUser from '../hooks/use-user';
 
-export default function Timeline() {
+export default function Header({userImage}) {
     const { user: loggedInUser } = useContext(UserContext);
     const { user } = useUser(loggedInUser?.uid);
     const { firebase } = useContext(FirebaseContext);
     const history = useHistory();
+
+    let newUserImage = userImage
+
+    if (newUserImage === '') 
+        newUserImage = user.profileImage;
+
 
     return (
         <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -79,7 +86,7 @@ export default function Timeline() {
                                                 currentTarget.src='/images/avatars/stefan.jpg';
                                             }}
                                             className="rounded-full h-8 w-8 flex"
-                                            src={`/images/avatars/${user.username}.jpg`}
+                                            src={newUserImage}
                                             alt={`${user.username} profile`}
                                         />
                                     </Link>
@@ -110,4 +117,8 @@ export default function Timeline() {
             </div>
         </header>
     );
+}
+
+Header.propTypes = {
+    userImage: PropTypes.string
 }

@@ -162,3 +162,18 @@ export async function toggleFollow(
     // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
     await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
+
+
+export async function updateLoggedInUserProfileImage(
+    loggedInUserDocId, // currently logged in user document id (stefan´s profile)
+    pathToProfileImage // Path to firestore storage
+) {
+    return firebase
+        .firestore()
+        .collection('users')
+        .doc(loggedInUserDocId)
+        .update({
+            profileImage: pathToProfileImage
+        });
+}
+

@@ -1,6 +1,7 @@
 import Firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 // here i want to import the seed file
 // import {seedDatabase} from '../seed';
@@ -16,8 +17,9 @@ const config = {
 
 const firebase = Firebase.initializeApp(config);
 const { FieldValue } = Firebase.firestore;
+const storage = firebase.storage();
 
 // here is where i want to call the seed file ONLY ONCE!
 // seedDatabase(firebase);
 
-export {firebase,FieldValue};
+export {firebase, FieldValue, storage};

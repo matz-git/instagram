@@ -38,6 +38,7 @@ export default function Suggestion({ userId, following, loggedInUserDocId }) {
                         profileId={profile.userId}
                         userId={userId}
                         loggedInUserDocId={loggedInUserDocId}
+                        profileImage={profile.profileImage} 
                     />
                 ))}
             </div>

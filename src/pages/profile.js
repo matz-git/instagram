@@ -9,7 +9,12 @@ export default function Profile() {
     const { username } = useParams();
     const [user, setUser] = useState(null);
     const history = useHistory();
+    const [imageContainer, setImageContainer] = useState('');
 
+    const imageContainerFunc = (a) => {
+        setImageContainer(a)
+    }
+    
     useEffect(() => {
         async function checkUserExists() {
             const [user] = await getUserByUsername(username);
@@ -25,8 +30,8 @@ export default function Profile() {
 
     return user?.username ? (
         <div className="bg-gray-background">
-            <Header />
-            <UserProfile user={user} />
+            <Header imageContainer={imageContainer} userImage={imageContainer}/>
+            <UserProfile user={user} setImageContainer={imageContainerFunc} />
         </div>
     ) : null;
 }

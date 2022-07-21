@@ -5,12 +5,12 @@ import LoggedInUserContext from '../../context/logged-in-user';
 
 export default function Sidebar() {
     const {
-        user: { docId = '', fullName, username, userId, following } = {}
+        user: { docId = '', fullName, username, userId, following, profileImage } = {}
     } = useContext(LoggedInUserContext);
 
     return (
         <div className="p-4">
-            <User username={username} fullName={fullName} />
+            <User username={username} fullName={fullName} profileImage={profileImage} />
             <Suggestions userId={userId} following={following} loggedInUserDocId={docId} />
         </div>
     );

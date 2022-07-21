@@ -37,7 +37,8 @@ export default function SignUp() {
                     emailAddress: emailAddress.toLowerCase(),
                     following: [],
                     followers: [],
-                    dateCreated: Date.now()
+                    dateCreated: Date.now(),
+                    profileImage: 'https://firebasestorage.googleapis.com/v0/b/instagram-2f402.appspot.com/o/images%2Fgast.jpg?alt=media'
                 });
 
                 history.push(ROUTES.DASHBOARD);
